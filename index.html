@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bob - AI Teacher Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>🎓 Bob - AI Teacher Assistant</h1>
+                <p class="tagline">Your Adaptive Learning Companion</p>
+            </div>
+        </header>
+
+        <!-- Mode Selection -->
+        <section class="mode-selection" id="modeSelection">
+            <h2>Choose Your Learning Mode</h2>
+            <div class="mode-grid">
+                <div class="mode-card" onclick="selectMode('MCQ')">
+                    <div class="mode-icon">📝</div>
+                    <h3>MCQ Mode</h3>
+                    <p>Multiple choice questions with instant feedback</p>
+                </div>
+                <div class="mode-card" onclick="selectMode('SHORT')">
+                    <div class="mode-icon">✍️</div>
+                    <h3>Short Answer</h3>
+                    <p>Concise answers to test your understanding</p>
+                </div>
+                <div class="mode-card" onclick="selectMode('LONG')">
+                    <div class="mode-icon">📄</div>
+                    <h3>Long Answer</h3>
+                    <p>Detailed explanations and analysis</p>
+                </div>
+                <div class="mode-card" onclick="selectMode('QUIZ')">
+                    <div class="mode-icon">🎯</div>
+                    <h3>Interactive Quiz</h3>
+                    <p>Adaptive quiz with real-time difficulty adjustment</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Configuration Panel -->
+        <section class="config-panel" id="configPanel" style="display: none;">
+            <h2>Configure Your Session</h2>
+            <div class="config-form">
+                <div class="form-group">
+                    <label for="topic">Topic:</label>
+                    <input type="text" id="topic" placeholder="Enter topic (e.g., Python Programming, Biology, History)">
+                </div>
+                <div class="form-group">
+                    <label for="difficulty">Difficulty Level:</label>
+                    <select id="difficulty">
+                        <option value="EASY">Easy</option>
+                        <option value="MEDIUM" selected>Medium</option>
+                        <option value="HARD">Hard</option>
+                    </select>
+                </div>
+                <div class="form-group" id="countGroup">
+                    <label for="questionCount">Number of Questions:</label>
+                    <input type="number" id="questionCount" min="1" max="20" value="5">
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="startSession()">Start Learning</button>
+                    <button class="btn btn-secondary" onclick="backToModes()">Back</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Question Display -->
+        <section class="question-section" id="questionSection" style="display: none;">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            
+            <div class="performance-badge" id="performanceBadge">
+                <span id="scoreDisplay">Score: 0/0</span>
+                <span id="difficultyDisplay">Difficulty: MEDIUM</span>
+            </div>
+
+            <div class="question-container" id="questionContainer">
+                <!-- Questions will be dynamically loaded here -->
+            </div>
+
+            <div class="navigation-buttons">
+                <button class="btn btn-secondary" onclick="previousQuestion()" id="prevBtn" style="display: none;">Previous</button>
+                <button class="btn btn-primary" onclick="submitAnswer()" id="submitBtn">Submit Answer</button>
+                <button class="btn btn-primary" onclick="nextQuestion()" id="nextBtn" style="display: none;">Next Question</button>
+                <button class="btn btn-success" onclick="finishSession()" id="finishBtn" style="display: none;">Finish Session</button>
+            </div>
+        </section>
+
+        <!-- Feedback Display -->
+        <section class="feedback-section" id="feedbackSection" style="display: none;">
+            <div class="feedback-container" id="feedbackContainer">
+                <!-- Feedback will be displayed here -->
+            </div>
+        </section>
+
+        <!-- Performance Report -->
+        <section class="report-section" id="reportSection" style="display: none;">
+            <h2>📊 Performance Report</h2>
+            <div class="report-container" id="reportContainer">
+                <!-- Report will be displayed here -->
+            </div>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="exportToPDF()">📄 Export to PDF</button>
+                <button class="btn btn-success" onclick="startNewSession()">🔄 New Session</button>
+            </div>
+        </section>
+
+        <!-- Loading Spinner -->
+        <div class="loading-spinner" id="loadingSpinner" style="display: none;">
+            <div class="spinner"></div>
+            <p>Bob is preparing your questions...</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
