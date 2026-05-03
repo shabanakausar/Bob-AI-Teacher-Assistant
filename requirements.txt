@@ -1,0 +1,7 @@
+Flask==3.0.0
+flask-cors==4.0.0
+Werkzeug==3.0.1
+google-generativeai
+python-dotenv==1.0.0
+ibm-cloud-sdk-core>=3.24.0
+requests>=2.31.0
